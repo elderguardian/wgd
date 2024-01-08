@@ -1,0 +1,13 @@
+version: '3'
+services:
+  client:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    privileged: true
+  curl-service:
+    image: curlimages/curl:latest
+    command: ["curl", "https://ipinfo.io/json"]
+    network_mode: service:client
+    depends_on:
+      - client
